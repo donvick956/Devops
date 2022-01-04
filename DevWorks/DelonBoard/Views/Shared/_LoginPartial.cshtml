@@ -1,0 +1,30 @@
+﻿@using DelonBoard.Entity
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline"  asp-route-returnUrl="@Url.Action("Login", "Account", new { area = "" })">
+                <div class="navbar-nav">
+                    @*<a class="btn btn-sm btn-danger text-bold nav-item nav-link text-light bold">Log Out</a>*@
+                    <a class="btn btn-sm btn-danger text-bold nav-item nav-link text-light bold" asp-area="" asp-controller="Account" asp-action="LogOff" method="post">Log Out</a>
+                </div>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>

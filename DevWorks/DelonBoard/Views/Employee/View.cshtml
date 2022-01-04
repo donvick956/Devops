@@ -1,0 +1,407 @@
+﻿@model DelonBoard.Entity.Models.Employee
+
+@{
+    ViewData["Title"] = "Delete Employee";
+}
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+
+@{
+    var selectListEmploymnetType = new SelectList(
+        new List<SelectListItem>
+        {
+            new SelectListItem {Text = "Full-Time", Value = "Full-Time"},
+            new SelectListItem {Text = "Regular Contract", Value = "Regular Contract"},
+            new SelectListItem {Text = "Developer Contract", Value = "Developer Contract"},
+                                                                                }, "Value", "Text");
+
+
+    var selectListContractDuration = new SelectList(
+        new List<SelectListItem>
+        {
+            new SelectListItem {Text = "1 month", Value = "1 month"},
+            new SelectListItem {Text = "2 months", Value = "2 months"},
+            new SelectListItem {Text = "3 months", Value = "3 months"},
+            new SelectListItem {Text = "4 months", Value = "4 months"},
+            new SelectListItem {Text = "5 months", Value = "5 months"},
+            new SelectListItem {Text = "6 months", Value = "6 months"},
+            new SelectListItem {Text = "7 months", Value = "7 months"},
+            new SelectListItem {Text = "8 months", Value = "8 months"},
+            new SelectListItem {Text = "9 months", Value = "9 months"},
+            new SelectListItem {Text = "10 months", Value = "10 months"},
+            new SelectListItem {Text = "11 months", Value = "11 months"},
+            new SelectListItem {Text = "12 months", Value = "12 months"},
+                                                        }, "Value", "Text");
+
+
+    var selectListGender = new SelectList(
+new List<SelectListItem>
+{
+            new SelectListItem {Text = "Male", Value = "Male"},
+            new SelectListItem {Text = "Female", Value = "Female"},
+                                                                       }, "Value", "Text");
+
+
+    var selectListMaritalStatus = new SelectList(
+      new List<SelectListItem>
+      {
+            new SelectListItem {Text = "Single", Value = "Single"},
+            new SelectListItem {Text = "Divorced", Value = "Divorced"},
+            new SelectListItem {Text = "Married", Value = "Married"},
+                                                                              }, "Value", "Text");
+
+
+    var selectListQualification = new SelectList(
+      new List<SelectListItem>
+      {
+          new SelectListItem {Text = "OND", Value = "OND"},
+            new SelectListItem {Text = "NCE", Value = "NCE"},
+            new SelectListItem {Text = "HND", Value = "HND"},
+            new SelectListItem {Text = "BSc", Value = "BSc"},
+            new SelectListItem {Text = "MSc", Value = "MSc"},
+                                                      }, "Value", "Text");
+
+
+    var selectListDepartment = new SelectList(
+new List<SelectListItem>
+{
+            new SelectListItem {Text = "Human Resources", Value = "Human Resources"},
+            new SelectListItem {Text = "Sales", Value = "Sales"},
+            new SelectListItem {Text = "Finance", Value = "Finance"},
+                                                                      }, "Value", "Text");
+
+
+
+}
+
+<section class="container" style="padding-top:100px;">
+    <div>
+        @*<h4 class=" text-center mt-4">HR BOARD</h4>*@
+
+
+
+        <div class="container">
+
+            <div>
+                <div class="row">
+                    <div class="col-md-4 border p-5 mt-4">
+
+                    </div>
+
+                    <div class="col-md-7 mt-4 border ms-2 pb-5">
+                        <p class="mt-2" style="color: navy; font-size: 1.3rem;">View Employee</p>
+                        <div>
+                            @using (Html.BeginForm("", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <input asp-for="EmployeeID" hidden />
+                                <div>
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="FirstName"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="FirstName" disabled> <br>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="LastName"></label> <br>
+                                            <input class="w-100 rounded border-1 form-control" type="text" asp-for="LastName" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="PhoneNumber"></label> <br>
+                                            <input type="number" class="w-100 rounded border-1 form-control" asp-for="PhoneNumber" disabled> <br>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="Email"></label> <br>
+                                            <input class="w-100 rounded border-1 form-control" type="email" asp-for="Email" disabled>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="HouseNoAndStreet"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="HouseNoAndStreet" disabled> <br>
+                                            <span asp-validation-for="HouseNoAndStreet" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="MoreAddress"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="MoreAddress" disabled> <br>
+                                            <span asp-validation-for="MoreAddress" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="City"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="City" disabled> <br>
+                                            <span asp-validation-for="City" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="State"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="State" disabled> <br>
+                                            <span asp-validation-for="State" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="DOB"></label> <br>
+                                            <input class="w-100 rounded border-1 form-control" type="date" asp-for="DOB" disabled>
+                                            <span asp-validation-for="DOB" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="Gender"></label> <br>
+                                            @Html.DropDownListFor(m => m.Gender, selectListGender, "", new { @class = "css-class", @disabled = "disabled" })
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="MaritalStatus"></label> <br>
+                                            @Html.DropDownListFor(m => m.MaritalStatus, selectListMaritalStatus, "", new { @class = "css-class", @disabled = "disabled" })
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="EmploymentType"></label> <br>
+                                            @Html.DropDownListFor(m => m.EmploymentType, selectListEmploymnetType, "", new { @class = "css-class", @disabled = "disabled" })
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="ContractDuration"></label> <br>
+                                            @Html.DropDownListFor(m => m.ContractDuration, selectListContractDuration, "", new { @class = "css-class", @disabled = "disabled" })
+                                            <span style="font-size:15px" class="text-danger">*Note: This field only applies to Regular and Developer Contract</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="Department"></label> <br>
+                                            @Html.DropDownListFor(m => m.Department, selectListDepartment, "", new { @class = "css-class", @disabled = "disabled" })
+                                            <span asp-validation-for="Department" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="AnnualGrossSalary"></label> <br>
+                                            <input type="number" class="w-100 rounded border-1 form-control" asp-for="AnnualGrossSalary" disabled> <br>
+                                            <span asp-validation-for="AnnualGrossSalary" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="Qualification"></label> <br>
+                                            @Html.DropDownListFor(m => m.Qualification, selectListQualification, "", new { @class = "css-class", @disabled = "disabled" })
+                                            <span asp-validation-for="Qualification" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="HealthInsurance"></label> <br>
+                                            <input type="number" class="w-100 rounded border-1 form-control" asp-for="HealthInsurance" disabled> <br>
+                                            <span asp-validation-for="HealthInsurance" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="LifeInsurance"></label> <br>
+                                            <input type="number" class="w-100 rounded border-1 form-control" asp-for="LifeInsurance" disabled> <br>
+                                            <span asp-validation-for="LifeInsurance" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="DateOfEmployment"></label> <br>
+                                            <input type="date" class="w-100 rounded border-1 form-control" asp-for="DateOfEmployment" disabled> <br>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="DateOfResumption"></label> <br>
+                                            <input type="date" class="w-100 rounded border-1 form-control" asp-for="DateOfResumption" disabled> <br>
+                                            <span asp-validation-for="DateOfResumption" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="OfficeBranchAddress"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="OfficeBranchAddress" disabled> <br>
+                                            <span asp-validation-for="OfficeBranchAddress" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="Designation"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="Designation" disabled> <br>
+                                            <span asp-validation-for="Designation" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="StaffNumber"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="StaffNumber" disabled> <br>
+                                            <span asp-validation-for="StaffNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="NextOfKin"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="NextOfKin" disabled> <br>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="NextOfKinPhone"></label> <br>
+                                            <input type="number" class="w-100 rounded border-1 form-control" asp-for="NextOfKinPhone" disabled> <br>
+                                        </div>
+                                    </div>
+
+                                    <h5>Reference 1</h5>
+                                    <div class="form-group row mt-3">
+
+                                        <div class="col-md-5">
+                                            <label asp-for="Reference1Name"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="Reference1Name" disabled> <br>
+                                            <span asp-validation-for="Reference1Name" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="Reference1Occupation"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="Reference1Occupation" disabled> <br>
+                                            <span asp-validation-for="Reference1Occupation" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="Reference1PlaceOfWork"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="Reference1PlaceOfWork" disabled> <br>
+                                            <span asp-validation-for="Reference1PlaceOfWork" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="Reference1PhoneNumber"></label> <br>
+                                            <input type="number" class="w-100 rounded border-1 form-control" asp-for="Reference1PhoneNumber" disabled> <br>
+                                            <span asp-validation-for="Reference1PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="Reference1Email"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="Reference1Email" disabled> <br>
+                                            <span asp-validation-for="Reference1Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="Reference1Address"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="Reference1Address" disabled> <br>
+                                            <span asp-validation-for="Reference1Address" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="Reference1Relationship"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="Reference1Relationship" disabled> <br>
+                                            <span asp-validation-for="Reference1Relationship" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <h5>Reference 2</h5>
+                                    <div class="form-group row mt-3">
+
+                                        <div class="col-md-5">
+                                            <label asp-for="Reference2Name"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="Reference2Name" disabled> <br>
+                                            <span asp-validation-for="Reference2Name" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="Reference2Occupation"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="Reference2Occupation" disabled> <br>
+                                            <span asp-validation-for="Reference2Occupation" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="Reference2PlaceOfWork"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="Reference2PlaceOfWork" disabled> <br>
+                                            <span asp-validation-for="Reference2PlaceOfWork" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="Reference2PhoneNumber"></label> <br>
+                                            <input type="number" class="w-100 rounded border-1 form-control" asp-for="Reference2PhoneNumber" disabled> <br>
+                                            <span asp-validation-for="Reference2PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="Reference2Email"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="Reference2Email" disabled> <br>
+                                            <span asp-validation-for="Reference2Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="Reference2Address"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="Reference2Address" disabled> <br>
+                                            <span asp-validation-for="Reference2Address" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="Reference2Relationship"></label> <br>
+                                            <input type="text" class="w-100 rounded border-1 form-control" asp-for="Reference2Relationship" disabled> <br>
+                                            <span asp-validation-for="Reference2Relationship" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mt-3">
+                                        <div class="col-md-5">
+                                            <label asp-for="PensionStaffContribution"></label> <br>
+                                            Yes
+                                            @Html.RadioButtonFor(model => model.PensionStaffContribution, "Yes", new { @class = "css-class", @disabled = "disabled" })
+                                            No
+                                            @Html.RadioButtonFor(model => model.PensionStaffContribution, "No", new { @class = "css-class", @disabled = "disabled" })
+                                            <span asp-validation-for="PensionStaffContribution" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label asp-for="PensionEmployeeContribution"></label> <br>
+                                            Yes
+                                            @Html.RadioButtonFor(model => model.PensionEmployeeContribution, "Yes", new { @class = "css-class", @disabled = "disabled" })
+                                            No
+                                            @Html.RadioButtonFor(model => model.PensionEmployeeContribution, "No", new { @class = "css-class", @disabled = "disabled" })
+                                            <span asp-validation-for="PensionEmployeeContribution" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group text-center row">
+                                        <div class="col-8 offset-2 row">
+                                            <div class="col-6 text-right">
+                                                <a asp-action="GetAll" class="btn btn-primary">
+                                                    Back
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
